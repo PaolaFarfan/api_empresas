@@ -3,7 +3,7 @@
 define('DB_HOST', 'localhost');
 define('DB_NAME', 'empresas_control');
 define('DB_USER', 'root');
-define('DB_PASS', '');
+define('DB_PASS', 'root');
 define('BASE_URL', 'http://localhost/empresas_control/');
 define('PUBLIC_URL', BASE_URL . 'public/');
 
