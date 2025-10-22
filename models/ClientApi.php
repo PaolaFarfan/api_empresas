@@ -127,5 +127,14 @@ class ClientApi {
         $stmt->execute();
         return $stmt;
     }
+
+
+    public function obtenerTotalClientes() {
+    $query = "SELECT COUNT(*) as total FROM " . $this->table . " WHERE estado = 1";
+    $stmt = $this->conn->prepare($query);
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $result['total'] ?? 0;
+}
 }
 ?>

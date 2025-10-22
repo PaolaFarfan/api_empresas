@@ -131,5 +131,35 @@ class TokenApi {
         $stmt->execute();
         return $stmt;
     }
+
+    // En TokenApi.php - Agregar este método
+public function obtenerPorToken($token) {
+    $query = "SELECT t.*, c.razon_social, c.ruc 
+              FROM " . $this->table . " t 
+              LEFT JOIN client_api c ON t.id_client_api = c.id 
+              WHERE t.token = :token AND t.estado = 1 LIMIT 1";
+    $stmt = $this->conn->prepare($query);
+    $stmt->bindParam(":token", $token);
+    $stmt->execute();
+    
+    if ($stmt->rowCount() == 1) {
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        $this->id = $row['id'];
+        $this->id_client_api = $row['id_client_api'];
+        $this->token = $row['token'];
+        $this->fecha_registro = $row['fecha_registro'];
+        $this->estado = $row['estado'];
+        return true;
+    }
+    return false;
+}
+
+public function obtenerTotalTokensActivos() {
+    $query = "SELECT COUNT(*) as total FROM " . $this->table . " WHERE estado = 1";
+    $stmt = $this->conn->prepare($query);
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $result['total'] ?? 0;
+}
 }
 ?>

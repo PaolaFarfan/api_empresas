@@ -127,5 +127,13 @@ class Empresa {
     public function rucExisteParaEditar($ruc, $id) {
         return $this->rucExiste($ruc, $id);
     }
+
+    public function obtenerTotalEmpresas() {
+    $query = "SELECT COUNT(*) as total FROM " . $this->table;
+    $stmt = $this->conn->prepare($query);
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $result['total'] ?? 0;
+}
 }
 ?>

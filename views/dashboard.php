@@ -1,6 +1,24 @@
 <?php 
 require_once 'layouts/header.php';
 authCheck();
+
+// Incluir modelos
+require_once '../models/Empresa.php';
+require_once '../models/ClientApi.php';
+require_once '../models/TokenApi.php';
+require_once '../models/CountRequest.php';
+
+// Crear instancias y obtener estadísticas
+$empresaModel = new Empresa();
+$clientApiModel = new ClientApi();
+$tokenApiModel = new TokenApi();
+$countRequestModel = new CountRequest();
+
+// Obtener datos reales
+$totalEmpresas = $empresaModel->obtenerTotalEmpresas();
+$totalClientesAPI = $clientApiModel->obtenerTotalClientes();
+$totalTokensActivos = $tokenApiModel->obtenerTotalTokensActivos();
+$totalSolicitudesHoy = $countRequestModel->obtenerSolicitudesHoy();
 ?>
 
 <style>
@@ -82,6 +100,16 @@ authCheck();
     padding: 8px 15px;
     font-weight: 500;
 }
+
+/* Animación para los números */
+.count-up {
+    animation: countUp 1s ease-out;
+}
+
+@keyframes countUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
 </style>
 
 <div class="container-fluid">
@@ -105,28 +133,28 @@ authCheck();
     <div class="row mb-4">
         <div class="col-md-3">
             <div class="stats-card" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
-                <div class="stats-number" id="empresas-count">-</div>
+                <div class="stats-number count-up" id="empresas-count"><?php echo $totalEmpresas; ?></div>
                 <div class="stats-label">Empresas Registradas</div>
                 <i class="fas fa-building card-icon mt-3"></i>
             </div>
         </div>
         <div class="col-md-3">
             <div class="stats-card" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
-                <div class="stats-number" id="clientes-count">-</div>
+                <div class="stats-number count-up" id="clientes-count"><?php echo $totalClientesAPI; ?></div>
                 <div class="stats-label">Clientes API</div>
                 <i class="fas fa-users card-icon mt-3"></i>
             </div>
         </div>
         <div class="col-md-3">
             <div class="stats-card" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
-                <div class="stats-number" id="tokens-count">-</div>
+                <div class="stats-number count-up" id="tokens-count"><?php echo $totalTokensActivos; ?></div>
                 <div class="stats-label">Tokens Activos</div>
                 <i class="fas fa-key card-icon mt-3"></i>
             </div>
         </div>
         <div class="col-md-3">
             <div class="stats-card" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">
-                <div class="stats-number" id="solicitudes-count">-</div>
+                <div class="stats-number count-up" id="solicitudes-count"><?php echo $totalSolicitudesHoy; ?></div>
                 <div class="stats-label">Solicitudes Hoy</div>
                 <i class="fas fa-chart-line card-icon mt-3"></i>
             </div>
@@ -285,9 +313,14 @@ authCheck();
                     <div class="activity-item mb-3">
                         <small class="text-muted">Sistema</small>
                         <div class="fw-bold">Dashboard cargado</div>
-                        <small>Todas las funciones disponibles</small>
+                        <small>Estadísticas actualizadas</small>
                     </div>
-                    <a href="#" class="btn btn-outline-primary btn-sm w-100">
+                    <div class="activity-item mb-3">
+                        <small class="text-muted">Resumen</small>
+                        <div class="fw-bold"><?php echo $totalEmpresas; ?> empresas activas</div>
+                        <small><?php echo $totalSolicitudesHoy; ?> solicitudes hoy</small>
+                    </div>
+                    <a href="index.php?action=count_request" class="btn btn-outline-primary btn-sm w-100">
                         <i class="fas fa-history me-1"></i>Ver Historial Completo
                     </a>
                 </div>
@@ -297,17 +330,6 @@ authCheck();
 </div>
 
 <script>
-// Función para cargar estadísticas (puedes implementar AJAX después)
-document.addEventListener('DOMContentLoaded', function() {
-    // Simular carga de estadísticas
-    setTimeout(() => {
-        document.getElementById('empresas-count').textContent = '12';
-        document.getElementById('clientes-count').textContent = '8';
-        document.getElementById('tokens-count').textContent = '24';
-        document.getElementById('solicitudes-count').textContent = '156';
-    }, 1000);
-});
-
 // Efectos hover mejorados
 document.querySelectorAll('.dashboard-card').forEach(card => {
     card.addEventListener('mouseenter', function() {
@@ -316,6 +338,14 @@ document.querySelectorAll('.dashboard-card').forEach(card => {
     
     card.addEventListener('mouseleave', function() {
         this.style.transform = 'translateY(0)';
+    });
+});
+
+// Animación para los números (opcional)
+document.addEventListener('DOMContentLoaded', function() {
+    const counters = document.querySelectorAll('.count-up');
+    counters.forEach(counter => {
+        counter.style.animation = 'countUp 1s ease-out';
     });
 });
 </script>

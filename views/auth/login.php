@@ -113,7 +113,7 @@
             <div class="credential-hint">
                 <div class="text-center small">
                     <strong>Credenciales de prueba</strong><br>
-                    Usuario: <strong>admin</strong> | Contraseña: <strong>admin</strong>
+                    Usuario: <strong></strong> | Contraseña: <strong></strong>
                 </div>
             </div>
 

@@ -126,5 +126,13 @@ class CountRequest {
         $stmt->execute();
         return $stmt;
     }
+
+    public function obtenerSolicitudesHoy() {
+    $query = "SELECT COUNT(*) as total FROM " . $this->table . " WHERE DATE(fecha) = CURDATE()";
+    $stmt = $this->conn->prepare($query);
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $result['total'] ?? 0;
+}
 }
 ?>
