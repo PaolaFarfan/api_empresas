@@ -104,7 +104,7 @@
             
             // Validaciones básicas
             if (!ruta_api) {
-                mostrarError('❌ Por favor, ingresa la URL de la API');
+                mostrarError(' Por favor, ingresa la URL de la API');
                 return;
             }
             
