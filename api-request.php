@@ -88,7 +88,7 @@
     </div>
 
     <script>
-        // ========== CÓDIGO JAVASCRIPT CORREGIDO ==========
+        // ========== CÓDIGO JAVASCRIPT ==========
         
         console.log('✅ JavaScript cargado correctamente');
         
