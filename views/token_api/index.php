@@ -32,7 +32,7 @@ authCheck();
                         <tr>
                             <td><?php echo $token['id']; ?></td>
                             <td>
-                                <code class="text-truncate" style="max-width: 150px; display: inline-block;">
+                                <code class="" style="max-width: 150px; display: inline-block;">
                                     <?php echo htmlspecialchars($token['token']); ?>
                                 </code>
                             </td>
