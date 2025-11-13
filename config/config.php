@@ -1,10 +1,10 @@
 <?php
 // Configuración de la aplicación
 define('DB_HOST', 'localhost');
-define('DB_NAME', 'empresas_control');
+define('DB_NAME', 'paola_empresas');
 define('DB_USER', 'root');
-define('DB_PASS', 'root');
-define('BASE_URL', 'http://localhost/empresas_control/');
+define('DB_PASS', '');
+define('BASE_URL', 'http://localhost/api_empresas/');
 define('PUBLIC_URL', BASE_URL . 'public/');
 
 // Configuración de sesión
