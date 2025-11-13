@@ -1,10 +1,10 @@
 <?php
 // Configuración de la aplicación
 define('DB_HOST', 'localhost');
-define('DB_NAME', 'paola_empresas');
-define('DB_USER', 'root');
-define('DB_PASS', '');
-define('BASE_URL', 'http://localhost/api_empresas/');
+define('DB_NAME', 'cwefycom_empresas_db');
+define('DB_USER', 'cwefycom_empresas_user');
+define('DB_PASS', '123empresas@');
+define('BASE_URL', 'https://empresas.cwefy.com/');
 define('PUBLIC_URL', BASE_URL . 'public/');
 
 // Configuración de sesión
